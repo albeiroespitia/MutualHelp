@@ -7,9 +7,17 @@ export default class CollaboratorsFullSite extends React.Component {
   render() {
     return (
       <div>
+        <br />
         <div className="container c2">
           <div className="row">
-            <CardCollaborator />
+            <div className="col s12 l9">
+              <CardCollaborator />
+              <CardCollaborator />
+              <CardCollaborator />
+              <CardCollaborator />
+              <CardCollaborator />
+              <CardCollaborator />
+            </div>
             <UpgradePro />
           </div>
         </div>
