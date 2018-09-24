@@ -1,0 +1,5 @@
+@media screen and (min-width: 800px){
+	nav .nav-wrapper .container, .c2 {
+		width: 85%;
+	}
+}
