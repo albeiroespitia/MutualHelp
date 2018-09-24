@@ -7,6 +7,7 @@ export default class FirstTimeFullSite extends React.Component {
   render() {
     return (
       <div className="container c2">
+        <br/>
         <div className="row">
           <div className="col s12 m9">
             <div className="card-panel z-depth-3 pdd40">
