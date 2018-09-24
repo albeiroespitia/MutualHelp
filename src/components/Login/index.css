@@ -1,0 +1,25 @@
+.card-panel {
+	border-radius: 10px;
+	display: block;
+}
+.card {
+	border-radius: 10px;
+}
+.pdd40 {
+	padding: 20px 40px;
+}
+.padding-left {
+	padding-left: 20px;
+}
+.no-mpadd {
+	margin-bottom: 0px;
+}
+.card-colaborador {
+	padding-bottom: 8px;
+}
+.btn-rounded {
+	border-radius: 40px;
+}
+.btn {
+		border-radius: 40px;
+}

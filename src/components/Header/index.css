@@ -1,0 +1,9 @@
+@media screen and (min-width: 800px){
+	nav .nav-wrapper .container, .c2 {
+		width: 75%;
+	}
+}
+
+.brand-logo{
+  margin-left: 20px;
+}
