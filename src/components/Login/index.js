@@ -2,6 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css'
 import axios from 'axios';
+import { history } from '../routing';
+
+
 
 export default class Login extends React.Component{
     constructor(props){
@@ -23,8 +26,8 @@ export default class Login extends React.Component{
             url: 'api/login',
             data: {'email':this.state.email,'password':this.state.password},
         }).then(function(response){
-            window.location.href='/home';
-            localStorage.setItem("logged",true);
+            sessionStorage.setItem('logged','true');
+            history.push('/home');
         }).catch(function (error) {
             document.getElementsByClassName('errorLogin')[0].style.display = 'block';
         });
@@ -50,7 +53,7 @@ export default class Login extends React.Component{
                             <label htmlFor="password">Contraseña</label>
                         </div>
                         <div className="center">
-                            <p class="red-text errorLogin">Papu esa wea no era el email</p>
+                            <p className="red-text errorLogin">Papu esa wea no era el email</p>
                             <br/>
                             <a onClick={this.loginHandler} className="btn waves-effect blue btn-large">Entrar</a>
                         </div>

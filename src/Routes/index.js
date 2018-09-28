@@ -1,31 +1,76 @@
 import React from 'react';
 import render from 'react-dom';
-import { BrowserRouter, Route, IndexRoute, Redirect } from 'react-router-dom';
+import { Router, Route, IndexRoute, Redirect } from 'react-router-dom';
 import LoginFullSite from '../components/FullSiteComponents/LoginFullSite';
 import RegisterFullSite from '../components/FullSiteComponents/RegisterFullSite';
 import FirstTime from '../components/FullSiteComponents/FirstTimeFullSite';
 import CollaboratorsFullSite from '../components/FullSiteComponents/CollaboratorsFullSite';
-import Header from '../components/Header';
 import Footer from '../components/Footer';
+import { AuthRoute } from 'react-router-auth';
+import { history } from '../components/routing';
+
 
 
 export default class Rutas extends React.Component{
+	constructor(props){
+		super(props);
+		this.isLogged = this.isLogged.bind(this)
+		this.requireAuth = this.requireAuth.bind(this)
+
+		this.state = {
+			isLogged: false
+		}
+	}
 	isLogged(){
-		return localStorage.getItem("logged");
+		if(sessionStorage.getItem("logged")=='true'){
+			return true;
+		}else{
+			return false;
+		}
+	}
+	requireAuth(){
+		if(sessionStorage.getItem('logged')=='true'){
+			return true;
+		}else{
+			return false;
+		}
 	}
 	render(){
 		return(
-			<BrowserRouter>
+			<Router history={history}>
 				<div>
-					{this.isLogged ? (<Header></Header>):(<Header></Header>)}
         			<Route exact path="/" />
-        			<Route path="/register" component={RegisterFullSite}/>
-        			<Route path="/login"  component={LoginFullSite}/>
-					<Route path="/firsttime"  component={FirstTime}/>
-					<Route path="/home"  component={CollaboratorsFullSite}/>
+					<Route path="/register"  render={()=>(
+						this.requireAuth() ? (
+							<Redirect to="/home"/>
+						):(
+							<RegisterFullSite/>
+						)
+					)} />
+					<Route path="/login"  render={()=>(
+						this.requireAuth() ? (
+							<Redirect to="/home"/>
+						):(
+							<LoginFullSite/>
+						)
+					)} />
+					<Route path="/firstime"  render={()=>(
+						this.requireAuth() ? (
+							<FirstTime/>
+						):(
+							<Redirect to="/login"/>
+						)
+					)} />
+					<Route path="/home"  render={()=>(
+						this.requireAuth() ? (
+							<CollaboratorsFullSite/>
+						):(
+							<Redirect to="/login"/>
+						)
+					)} />
 					<Footer></Footer>
         		</div>
-    		</BrowserRouter>
+    		</Router>
 		);
 	}
 };

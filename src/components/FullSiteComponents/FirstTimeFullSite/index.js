@@ -2,10 +2,13 @@ import React from "react";
 import ReactDOM from "react-dom";
 import UpgradePro from "../../UpgradePro";
 import "./index.css";
+import Header from '../../Header';
 
 export default class FirstTimeFullSite extends React.Component {
   render() {
     return (
+      <div>
+      <Header logged={true}/>
       <div className="container c2">
         <br/>
         <div className="row">
@@ -67,6 +70,7 @@ export default class FirstTimeFullSite extends React.Component {
           </div>
           <UpgradePro />
         </div>
+      </div>
       </div>
     );
   }
