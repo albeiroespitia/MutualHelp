@@ -14,13 +14,13 @@ export default class Rutas extends React.Component{
 		return(
 			<BrowserRouter>
 				<div>
-							<Header></Header>
+					<Header></Header>
         			<Route exact path="/" />
         			<Route path="/register" component={RegisterFullSite}/>
         			<Route path="/login"  component={LoginFullSite}/>
-							<Route path="/firsttime"  component={FirstTime}/>
-							<Route path="/home"  component={CollaboratorsFullSite}/>
-							<Footer></Footer>
+					<Route path="/firsttime"  component={FirstTime}/>
+					<Route path="/home"  component={CollaboratorsFullSite}/>
+					<Footer></Footer>
         		</div>
     		</BrowserRouter>
 		);
