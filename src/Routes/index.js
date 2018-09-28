@@ -10,11 +10,14 @@ import Footer from '../components/Footer';
 
 
 export default class Rutas extends React.Component{
+	isLogged(){
+		return localStorage.getItem("logged");
+	}
 	render(){
 		return(
 			<BrowserRouter>
 				<div>
-					<Header></Header>
+					{this.isLogged ? (<Header></Header>):(<Header></Header>)}
         			<Route exact path="/" />
         			<Route path="/register" component={RegisterFullSite}/>
         			<Route path="/login"  component={LoginFullSite}/>

@@ -24,6 +24,7 @@ export default class Login extends React.Component{
             data: {'email':this.state.email,'password':this.state.password},
         }).then(function(response){
             window.location.href='/home';
+            localStorage.setItem("logged",true);
         }).catch(function (error) {
             document.getElementsByClassName('errorLogin')[0].style.display = 'block';
         });
