@@ -1,11 +1,37 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css'
+import axios from 'axios';
 
 export default class Login extends React.Component{
-  render(){
-    return(
-      <div className="container">
+    constructor(props){
+        super(props);
+        this.state = ({
+            email : '',
+            password: ''
+        })
+        this.loginHandler = this.loginHandler.bind(this);
+    }
+
+    handleChange (event) {
+        this.setState({[event.target.name]:event.target.value})
+    }
+
+    loginHandler(){
+        axios({
+            method: 'POST',
+            url: 'api/login',
+            data: {'email':this.state.email,'password':this.state.password},
+        }).then(function(response){
+            window.location.href='/home';
+        }).catch(function (error) {
+            document.getElementsByClassName('errorLogin')[0].style.display = 'block';
+        });
+    }
+
+    render(){
+        return(
+        <div className="container">
             <div className="row no-mpadd">
                 <div className="col s12 offset-m3 m6">
                     <br/>
@@ -15,16 +41,17 @@ export default class Login extends React.Component{
                             <h5>Inicia Sesión</h5>
                         </div>
                         <div className="input-field">
-							                 <input type="text" name="email" id="email"/>
-							                 <label for="email">Correo electronico</label>
-						            </div>
+                            <input value={this.state.email} onChange={event => this.handleChange(event)} type="text" name="email" id="email"/>
+                            <label htmlFor="email">Correo electronico</label>
+                        </div>
                         <div className="input-field">
-							                 <input type="password" name="password" id="password"/>
-							                 <label for="password">Contraseña</label>
-						            </div>
+                            <input value={this.state.password} onChange={event => this.handleChange(event)} type="password" name="password" id="password"/>
+                            <label htmlFor="password">Contraseña</label>
+                        </div>
                         <div className="center">
+                            <p class="red-text errorLogin">Papu esa wea no era el email</p>
                             <br/>
-                            <a href="pages/home.html" className="btn waves-effect blue btn-large">Entrar</a>
+                            <a onClick={this.loginHandler} className="btn waves-effect blue btn-large">Entrar</a>
                         </div>
                     </div>
                 </div>
@@ -37,6 +64,6 @@ export default class Login extends React.Component{
                 </div>
             </div>
         </div>
-    );
-  }
+        );
+    }
 }

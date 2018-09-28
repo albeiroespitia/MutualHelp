@@ -23,3 +23,7 @@
 .btn {
 		border-radius: 40px;
 }
+
+.errorLogin{
+	display: none;
+}
