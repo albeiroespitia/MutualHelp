@@ -9,8 +9,6 @@ import Footer from '../components/Footer';
 import { AuthRoute } from 'react-router-auth';
 import { history } from '../components/routing';
 
-
-
 export default class Rutas extends React.Component{
 	constructor(props){
 		super(props);
@@ -39,7 +37,9 @@ export default class Rutas extends React.Component{
 		return(
 			<Router history={history}>
 				<div>
-        			<Route exact path="/" />
+        			<Route exact path="/" render={()=> (
+						<Redirect to="/login"/>
+					)}/>
 					<Route path="/register"  render={()=>(
 						this.requireAuth() ? (
 							<Redirect to="/home"/>
