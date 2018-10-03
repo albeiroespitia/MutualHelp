@@ -1,18 +1,18 @@
 const Day = require('../models/day')
 
-function create(req,res){
-    console.log(req.body.day);
-    const day = new Day({
-        day : req.body.day
+function read (req, res) {
+    Day.find({ 
+        day: req.body.day}, (err, day) => {
+      if (err) return res.status(500).send({ message: err })
+      if (!day.length) return res.status(401).send({ message: 'No existe el dia' })
+  
+      req.day = day
+      res.status(200).send({
+        day: day,
+      })
     })
-    
-    day.save((err) => {
-        if (err) return res.status(500).send({ message: `Error al crear el dia: ${err}` })
-        return res.status(201).send({message:"creado papu"});
-    })
-
-}
+  }
 
 module.exports = {
-    create
+    read
 }

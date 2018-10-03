@@ -21,12 +21,14 @@ export default class Login extends React.Component{
     }
 
     loginHandler(){
+        let _this = this;
         axios({
             method: 'POST',
             url: 'api/login',
             data: {'email':this.state.email,'password':this.state.password},
         }).then(function(response){
             sessionStorage.setItem('logged','true');
+            sessionStorage.setItem('email',_this.state.email);
             history.push('/home');
         }).catch(function (error) {
             document.getElementsByClassName('errorLogin')[0].style.display = 'block';
