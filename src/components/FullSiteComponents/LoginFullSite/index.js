@@ -7,15 +7,11 @@ import Header from '../../Header';
 
 export default class LoginFullSite extends React.Component{
   render(){
-        if(localStorage.getItem("logged")){
           return (
           <div>
             <Header></Header>
             <Login></Login>
           </div>
           )
-        }else{
-          return <Redirect to="/home"/>
-        }
   }
 }
