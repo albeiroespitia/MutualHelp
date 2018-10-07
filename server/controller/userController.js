@@ -29,7 +29,18 @@ function signIn (req, res) {
   })
 }
 
+function readByEmail (req, res, next) {
+  User.find({ 
+      email: req.body.email}, (err, user) => {
+    if (err) return res.status(500).send({ message: err })
+    if (!user.length) return res.status(401).send({ message: 'No existe el usuario' })
+    res.locals.user = user;
+    next();
+  })
+}
+
 module.exports = {
   signUp,
-  signIn
+  signIn,
+  readByEmail
 }

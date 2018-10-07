@@ -1,4 +1,4 @@
-const Collaborator = require('../models/collaborators')
+const Collaborator = require('../models/collaborator')
 
 function read (req, res) {
     Collaborator.find({ 
@@ -13,6 +13,19 @@ function read (req, res) {
   })
 }
 
+function create (req, res, next) {
+  const collaborator = new Collaborator({
+    user : res.locals.user[0]._id,
+    subject : req.body.asignaturaBueno
+  })
+
+  collaborator.save((err) => {
+    if (err) return res.status(500).send({ message: `Error al crear el colaborador: ${err}` })
+    next();
+  })
+}
+
 module.exports = {
-  getCollaborators
+  read,
+  create
 }

@@ -4,6 +4,10 @@ const userController = require('../controller/userController');
 const dayController = require('../controller/dayController');
 const programController = require('../controller/programController');
 const subjectController = require('../controller/subjectController');
+const collaboratorController = require('../controller/collaboratorsController');
+const helpRequestController = require('../controller/helpRequestController');
+
+
 
 
 
@@ -14,6 +18,11 @@ api.post('/dia',dayController.read);
 api.post('/program',programController.read);
 api.post('/subject',subjectController.read);
 
+// SET
+api.post('/setCollaborator',userController.readByEmail,collaboratorController.create,helpRequestController.create);
+
+
+api.post('/checkFirstTime',userController.readByEmail,helpRequestController.readById);
 
 module.exports = api
 
