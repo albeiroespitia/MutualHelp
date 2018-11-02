@@ -88,12 +88,13 @@ export default class CollaboratorsFullSite extends React.Component {
         this.setState({actualUser:actualUserData})
         setTimeout(function(){
             _this.divideUsers();
-        },100)
+        },4)
+
     }
 
     divideUsers(){
         let temporalArray = this.state.users;
-        let temporalArrayCompatible = [];
+        let temporalArrayCompatible = this.state.compatibleUsers;
         this.state.users.map((element,idx)=>{
             if(element.materiaPro == this.state.actualUser.materiaNoob){
                 let user = temporalArray.splice(idx,1)[0];
