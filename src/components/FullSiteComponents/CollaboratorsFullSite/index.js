@@ -3,16 +3,26 @@ import ReactDOM from "react-dom";
 import UpgradePro from "../../UpgradePro";
 import Header from '../../Header';
 import CardCollaborator from "../../CardCollaborator";
+import './index.css';
 
 export default class CollaboratorsFullSite extends React.Component {
     constructor(props){
         super(props)
         this.state = {
-            users: []
+            users: [],
+            actualUser : {},
+            compatibleUsers: []
         }
+        this.listUsers = this.listUsers.bind(this);
+        this.getActualUser = this.getActualUser.bind(this);
+        this.divideUsers = this.divideUsers.bind(this);
     }
 
-    async componentDidMount(){
+    componentDidMount(){
+        this.listUsers();
+    }
+
+    async listUsers(){
         let _this = this;
         let temporalArray;
         let response = await fetch('api/usersAll',{
@@ -63,16 +73,34 @@ export default class CollaboratorsFullSite extends React.Component {
                     let data5 = await response5.json();
                     temporalArray[idx].materiaNoob = data5.subject.name;
                     _this.setState({users:temporalArray})
+                    _this.getActualUser();
                 }
             })
         })
 
+    }
+
+    getActualUser(){
+        let _this = this;
+        let actualUserData = this.state.users.find( item =>{
+            return item.email == sessionStorage.getItem('email');
+        })
+        this.setState({actualUser:actualUserData})
         setTimeout(function(){
+            _this.divideUsers();
+        },100)
+    }
 
-        },3000);
-
-
-
+    divideUsers(){
+        let temporalArray = this.state.users;
+        let temporalArrayCompatible = [];
+        this.state.users.map((element,idx)=>{
+            if(element.materiaPro == this.state.actualUser.materiaNoob){
+                let user = temporalArray.splice(idx,1)[0];
+                temporalArrayCompatible.push(user);
+                this.setState({compatibleUsers:temporalArrayCompatible});
+            }
+        })
     }
 
     render() {
@@ -83,12 +111,31 @@ export default class CollaboratorsFullSite extends React.Component {
             <div className="container c2">
               <div className="row">
                 <div className="col s12 l9">
+                    <div className="row">
+                        <div className="col l1"></div>
+                        <hr className="separador col l3"/>
+                        <span className="col l4">Usuarios compatibles contigo</span>
+                        <hr className="separador col l3"/>
+                        <div className="col l1"></div>
+                    </div>
                     {
-                        this.state.users.map(function(user,idx){
-                            console.log(user);
+                        this.state.compatibleUsers.map(function(user,idx){
                             return <CardCollaborator key={idx} user={user} />
                         })
                     }
+                    <div className="row">
+                        <div className="col l1"></div>
+                        <hr className="separador col l3"/>
+                        <span className="col l4">Todos los usuarios</span>
+                        <hr className="separador col l3"/>
+                        <div className="col l1"></div>
+                    </div>
+                    {
+                        this.state.users.map(function(user,idx){
+                            return <CardCollaborator key={idx} user={user} />
+                        })
+                    }
+
                 </div>
                 <UpgradePro />
               </div>

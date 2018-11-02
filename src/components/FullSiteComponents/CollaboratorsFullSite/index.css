@@ -1,0 +1,10 @@
+.separador{
+    float: left;
+}
+
+span{
+    float: left;
+    text-align: center;
+    font-size: 16px;
+    color: white;
+}
