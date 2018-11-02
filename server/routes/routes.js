@@ -18,6 +18,14 @@ api.post('/dia',dayController.read);
 api.post('/program',programController.read);
 api.post('/subject',subjectController.read);
 
+
+api.post('/usersAll',userController.readAll);
+api.post('/collaboratorsAll',collaboratorController.readSubjectAll);
+api.post('/subjectById',subjectController.readById);
+api.post('/helpRequestAll',helpRequestController.readAll);
+
+
+
 // SET
 api.post('/setCollaborator',userController.readByEmail,collaboratorController.create,helpRequestController.create);
 
@@ -25,4 +33,3 @@ api.post('/setCollaborator',userController.readByEmail,collaboratorController.cr
 api.post('/checkFirstTime',userController.readByEmail,helpRequestController.readById);
 
 module.exports = api
-

@@ -3,6 +3,9 @@ import ReactDOM from "react-dom";
 import "./index.css";
 
 export default class CardCollaborator extends React.Component {
+  constructor(props){
+      super(props);
+  }
   render() {
     return (
       <div className="card-panel z-depth-3 waves-effect waves-blue card-colaborador">
@@ -16,10 +19,11 @@ export default class CardCollaborator extends React.Component {
         <div className="col s8 m10">
           <div>
             <big>
-              <b>Nombre Apellido</b>
+              <b>{this.props.user.name} {this.props.user.lastname}</b>
             </big>
           </div>
-          <div>Puede ayudarte en Programación</div>
+          <div>Puede ayudarte en {this.props.user.materiaPro}</div>
+          <div>Necesita ayuda en {this.props.user.materiaNoob}</div>
           <div>
             En estos horarios <div className="chip">Lunes 8-10 am</div>
             <div className="chip">Martes 2-4 pm</div>

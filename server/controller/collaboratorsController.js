@@ -1,8 +1,20 @@
 const Collaborator = require('../models/collaborator')
 
 function read (req, res) {
-    Collaborator.find({ 
+    Collaborator.find({
       email: req.body.email}, (err, collaborator) => {
+    if (err) return res.status(500).send({ message: err })
+    if (!collaborator.length) return res.status(401).send({ message: 'No existe el colaborador' })
+
+    req.collaborator = collaborator
+    res.status(200).send({
+      collaborator: collaborator,
+    })
+  })
+}
+
+function readSubjectAll (req, res) {
+    Collaborator.find({}, (err, collaborator) => {
     if (err) return res.status(500).send({ message: err })
     if (!collaborator.length) return res.status(401).send({ message: 'No existe el colaborador' })
 
@@ -27,5 +39,6 @@ function create (req, res, next) {
 
 module.exports = {
   read,
-  create
+  create,
+  readSubjectAll
 }

@@ -15,7 +15,6 @@ function create(req,res,next){
 }
 
 function readById (req, res, next) {
-    console.log(res.locals.user[0]._id);
     HelpRequest.find({user:res.locals.user[0]._id}, (err, helpRequest) => {
         if (err) return res.status(500).send({ message: err })
         if (!helpRequest.length) return res.status(401).send({ message: 'No existe el helpRequest' })
@@ -25,7 +24,18 @@ function readById (req, res, next) {
     })
 }
 
+function readAll (req, res, next) {
+    HelpRequest.find({}, (err, helpRequest) => {
+        if (err) return res.status(500).send({ message: err })
+        if (!helpRequest.length) return res.status(401).send({ message: 'No existe el helpRequest' })
+        res.status(200).send({
+            helpRequest: helpRequest,
+        })
+    })
+}
+
 module.exports = {
     create,
-    readById
+    readById,
+    readAll
 }
