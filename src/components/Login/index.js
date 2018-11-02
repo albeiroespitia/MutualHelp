@@ -37,7 +37,7 @@ export default class Login extends React.Component{
             history.push('/home');
 		})
     }
-    
+
     handleChange (event) {
         this.setState({[event.target.name]:event.target.value})
     }
@@ -87,7 +87,7 @@ export default class Login extends React.Component{
             <div className="row">
                 <div className="col s12 offset-m3 m6">
                     <div className="card-panel center">
-                        <big>Aun no tienes una cuenta? <a href="pages/register.html">Crear Cuenta</a></big>
+                        <big>Aun no tienes una cuenta? <a href="/register">Crear Cuenta</a></big>
                     </div>
                 </div>
             </div>

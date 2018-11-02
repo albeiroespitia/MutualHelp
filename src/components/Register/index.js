@@ -74,7 +74,7 @@ export default class Register extends React.Component {
           <div class="col s12 offset-m3 m6">
             <div class="card-panel center">
               <big>
-                Ya tienes una cuenta? <a href="../index.html">Iniciar Sesión</a>
+                Ya tienes una cuenta? <a href="/login">Iniciar Sesión</a>
               </big>
             </div>
           </div>

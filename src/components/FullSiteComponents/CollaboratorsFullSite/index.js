@@ -99,6 +99,10 @@ export default class CollaboratorsFullSite extends React.Component {
                 let user = temporalArray.splice(idx,1)[0];
                 temporalArrayCompatible.push(user);
                 this.setState({compatibleUsers:temporalArrayCompatible});
+                this.setState({users:temporalArray});
+            }else if(element.email == sessionStorage.getItem('email')){
+                temporalArray.splice(idx,1);
+                this.setState({users:temporalArray});
             }
         })
     }

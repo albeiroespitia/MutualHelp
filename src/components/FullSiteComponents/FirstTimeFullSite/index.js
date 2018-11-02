@@ -21,7 +21,7 @@ export default class FirstTimeFullSite extends React.Component {
     this.handleForm = this.handleForm.bind(this);
   }
 
-  componentDidMount(){           
+  componentDidMount(){
     let _this = this;
     axios({
       method: 'POST',
@@ -121,7 +121,7 @@ export default class FirstTimeFullSite extends React.Component {
                     })
                   }
                 </Input>
-                <Input id="asignaturaBueno" onChange={this.handleChange} s={6} type='select' label="En que asignatura eres weno papu?" defaultValue='default'>
+                <Input id="asignaturaBueno" onChange={this.handleChange} s={6} type='select' label="En que asignatura eres bueno?" defaultValue='default'>
                   <option disabled value='default'>Seleccione</option>
                   {
                     this.state.subjects.map((subject,idx) => {
